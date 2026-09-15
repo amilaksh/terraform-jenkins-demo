@@ -7,21 +7,21 @@ pipeline {
         stage('Init') {
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh 'terraform init'
+                    sh '/opt/homebrew/bin/terraform init'
                 }
             }
         }
         stage('Plan') {
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh 'terraform plan -out=tfplan'
+                    sh '/opt/homebrew/bin/terraform plan -out=tfplan'
                 }
             }
         }
         stage('Apply') {
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh 'terraform apply -auto-approve tfplan'
+                    sh '/opt/homebrew/bin/terraform apply -auto-approve tfplan'
                 }
             }
         }
